@@ -565,6 +565,10 @@ def _setup_desktop_behavior(window):
     # 发送到所有窗口后面，不抢焦点
     native.orderBack_(None)
 
+    # 隐藏 Dock 图标
+    from Cocoa import NSApp
+    NSApp.setActivationPolicy_(1)  # NSApplicationActivationPolicyAccessory
+
 
 
 def main():
