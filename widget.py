@@ -116,6 +116,11 @@ HTML = r"""<!DOCTYPE html>
     transform: scale(0.94);
   }
 
+  .close-btn:hover {
+    background: rgba(255,69,58,0.28);
+    color: var(--red);
+  }
+
   /* ---- 余额主区域 ---- */
   .balance-area {
     display: flex;
@@ -298,6 +303,11 @@ HTML = r"""<!DOCTYPE html>
           <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
         </svg>
       </button>
+      <button class="action-btn close-btn" id="btn-close" title="关闭">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
     </div>
   </div>
 
@@ -395,6 +405,11 @@ HTML = r"""<!DOCTYPE html>
     } catch (_) { setUI('网络错误', 'error'); }
   };
 
+  // ---- Close ----
+  document.getElementById('btn-close').onclick = () => {
+    window.pywebview.api.quit_app();
+  };
+
   // ---- Init ----
   (async () => {
     try {
@@ -475,6 +490,9 @@ class BalanceAPI:
         return balance, currency
 
     # ---- JS API ----
+    def quit_app(self):
+        os._exit(0)
+
     def get_api_key(self):
         return self.api_key
 
